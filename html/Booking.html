@@ -2,90 +2,146 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Your Travel</title>
+    <title>Complete Booking | StayEasy</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            background: #f0f7ff;
+            padding: 50px 20px;
+        }
+        nav {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: #2c7da0;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 5px 10px;
+            font-weight: bold;
         }
         .container {
-            max-width: 400px;
-            margin: 50px auto;
-            background: #fff;
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         h2 {
+            color: #1f4e6c;
+            margin-bottom: 20px;
             text-align: center;
-            color: #333;
+        }
+        .hotel-summary {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
         label {
             display: block;
             margin-top: 15px;
+            font-weight: bold;
             color: #555;
         }
         input, select {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-top: 5px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 8px;
         }
         button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-top: 20px;
-            background: #007bff;
-            color: #fff;
+            background: #ff9800;
+            color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-weight: bold;
         }
         button:hover {
-            background: #0056b3;
+            background: #e68900;
+        }
+        .total {
+            font-size: 24px;
+            color: #ff9800;
+            text-align: center;
+            margin: 20px 0;
         }
         .success {
-            color: green;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
-            margin-top: 15px;
+        }
+        .room-option {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .room-card {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .room-card.selected {
+            border-color: #ff9800;
+            background: #fff3e0;
         }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="hotels.html">All Hotels</a> |
+        <a href="about.html">About Us</a> |
+        <a href="login.html">Log In</a> |
+        <a href="signup.html">Sign Up</a>
+    </nav>
+
     <div class="container">
-        <h2>Book Your Travel</h2>
+        <h2>Complete Your Booking</h2>
+        
+        <div id="hotelInfo" class="hotel-summary"></div>
+        
         <form id="bookingForm">
-            <label for="destination">Destination</label>
-            <input type="text" id="destination" name="destination" required>
-
-            <label for="date">Travel Date</label>
-            <input type="date" id="date" name="date" required>
-
-            <label for="people">Number of People</label>
-            <input type="number" id="people" name="people" min="1" required>
-
-            <label for="class">Class</label>
-            <select id="class" name="class" required>
-                <option value="Economy">Economy</option>
-                <option value="Business">Business</option>
-                <option value="First">First</option>
-            </select>
-
-            <button type="submit">Book Now</button>
+            <label>Full Name</label>
+            <input type="text" id="name" required>
+            
+            <label>Email</label>
+            <input type="email" id="email" required>
+            
+            <label>Phone Number</label>
+            <input type="tel" id="phone" required>
+            
+            <label>Select Room Type</label>
+            <div class="room-option" id="roomOptions"></div>
+            
+            <label>Special Requests (Optional)</label>
+            <input type="text" id="requests" placeholder="e.g., extra bed, vegetarian meal">
+            
+            <div class="total">Total: $<span id="totalPrice">0</span></div>
+            
+            <button type="submit">Confirm Booking</button>
         </form>
-        <div class="success" id="successMsg" style="display:none;">Booking successful!</div>
+        <div id="message"></div>
     </div>
-    <script>
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.getElementById('successMsg').style.display = 'block';
-            // Here you can add code to send booking data to your backend/server
-        });
-    </script>
 </body>
 </html>

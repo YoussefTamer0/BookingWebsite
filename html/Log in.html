@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="D:\2 study\universty\Second year\semester 4\web programming\project\Css\Log in.css">
+    <link rel="stylesheet" href="Log in.css">
     <meta charset="UTF-8">
     <title>Log In</title>
     <style>
@@ -24,60 +24,29 @@
 </head>
 <body>
     <nav>
-        <a href="About%20us.html">About Us</a> |
-        <a href="Log%20in.html">Log In</a> |
-        <a href="Sign%20up.html">Sign Up</a>
+        <a href="About.html">About Us</a> |
+        <a href="Log in.html">Log In</a> |
+        <a href="Sign up.html">Sign Up</a>
     </nav>
-    <hr>
 
-    <h2>Log In</h2>
-
-    <form onsubmit="return login()">
-        <label>Email:</label>
-        <input type="email" id="email" required>
-        <br><br>
-
-        <label>Password:</label>
-        <input type="password" id="password" required>
-        <br><br>
-
-        <div style="text-align: center;">
+    <div class="container">
+        <h2>Welcome Back!</h2>
+        <div class="subtitle">Log in to your StayEasy account</div>
+        
+        <div id="messageBox"></div>
+        
+        <form id="loginForm">
+            <label>Email Address</label>
+            <input type="email" id="email" placeholder="your@email.com" required>
+            
+            <label>Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+            
             <button type="submit">Log In</button>
+        </form>
+        
+        <div class="signup-link">
+            Don't have an account? <a href="Sign up.html">Sign Up</a>
         </div>
-    </form>
-
-    <p id="message"></p>
-
-    <script>
-        const users = [
-            { email: "youssef214@gmail.com", password: "Joe#$14" },
-            { email: "admin@aast.com", password: "admin" },
-            { email: "thrt@yahoo.com", password: "thht*&1" }
-        ];
-
-        function login() {
-            const emailInput = document.getElementById("email").value;
-            const passwordInput = document.getElementById("password").value;
-            const message = document.getElementById("message");
-
-            const user = users.find(
-                u => u.email === emailInput && u.password === passwordInput
-            );
-
-            if (user) {
-                message.textContent = "Login successful, welcome back!";
-            } else {
-                message.textContent = "Invalid email or password.";
-            }
-
-            return false;
-        }
-    </script>
-
-    <p>
-        Don't have an account?
-        <a href="Sign%20up.html">Sign up</a>
-    </p>
-
-</body>
-</html>
+        
+        
