@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Hotels | StayEasy Hotel Booking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            background: #f0f7ff;
+            padding: 50px 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav a {
+            color: #2c7da0;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 5px 10px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #1f5e7c;
+            text-decoration: underline;
+        }
+        
+        /* User Bar */
+        .user-bar {
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+        }
+        .user-info {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logout-btn {
+            background: #ff9800;
+            color: white;
+            padding: 5px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background: #e68900;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #1f4e6c;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .filter-group input, .filter-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .filter-btn {
+            background: #2c7da0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .filter-btn:hover {
+            background: #1f5e7c;
+        }
+        .reset-btn {
+            background: #666;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        /* Results Count */
+        .results-count {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        /* Hotel Cards */
+        .hotel-card {
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            transition: 0.3s;
+            border: 1px solid #e9ecef;
+        }
+        .hotel-card:hover {
+            background: #eef2f5;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .hotel-img {
+            width: 180px;
+            height: 140px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+        .hotel-info {
+            flex: 2;
+        }
+        .hotel-info h3 {
+            color: #1f4e6c;
+            font-size: 22px;
+        }
+        .hotel-location {
+            color: #666;
+            margin: 5px 0;
+        }
+        .rating {
+            color: #ff9800;
+            margin: 5px 0;
+        }
+        .amenities {
+            margin: 10px 0;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .amenity {
+            background: #e9ecef;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        .price-section {
+            text-align: right;
+            min-width: 150px;
+        }
+        .price {
+            font-size: 32px;
+            color: #ff9800;
+            font-weight: bold;
+        }
+        .per-night {
+            font-size: 12px;
+            color: #666;
+        }
+        .book-btn {
+            background: #2c7da0;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+            width: 100%;
+        }
+        .book-btn:hover {
+            background: #1f5e7c;
+        }
+        
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            color: #999;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            padding: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .hotel-img {
+                width: 100%;
+                height: 120px;
+            }
+            .price-section {
+                text-align: left;
+                width: 100%;
+            }
+            .filter-bar {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="hotels.html">Hotels</a> |
+        <a href="about.html">About Us</a> |
+        <a href="login.html">Log In</a> |
+        <a href="signup.html">Sign Up</a>
+    </nav>
+
+    <!-- User Info Bar -->
+    <div class="user-bar" id="userBar"></div>
+
+    <div class="container">
+        <h1>🏨 All Hotels</h1>
+        <p class="subtitle">Discover the best hotels at the best prices</p>
+        
+        <!-- Filter Section -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label>📍 City</label>
+                <input type="text" id="filterCity" placeholder="Enter city name">
+            </div>
+            <div class="filter-group">
+                <label>💰 Price Range</label>
+                <select id="filterPrice">
+                    <option value="">All Prices</option>
+                    <option value="0-50">Under $50</option>
+                    <option value="50-100">$50 - $100</option>
+                    <option value="100-150">$100 - $150</option>
+                    <option value="150-200">$150 - $200</option>
+                    <option value="200+">$200+</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>⭐ Minimum Rating</label>
+                <select id="filterRating">
+                    <option value="0">Any Rating</option>
+                    <option value="4">4+ Stars</option>
+                    <option value="4.5">4.5+ Stars</option>
+                    <option value="4.8">4.8+ Stars</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>🛏️ Amenities</label>
+                <select id="filterAmenity">
+                    <option value="">All</option>
+                    <option value="pool">Has Pool</option>
+                    <option value="wifi">Has WiFi</option>
+                    <option value="breakfast">Has Breakfast</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn" onclick="filterHotels()">🔍 Search</button>
+                <button class="reset-btn" onclick="resetFilter()">Reset</button>
+            </div>
+        </div>
+        
+        <!-- Results Count -->
+        <div class="results-count" id="resultsCount"></div>
+        
+        <!-- Hotel List -->
+        <div id="allHotels"></div>
+    </div>
+    
+    <footer>
+        © 2024 StayEasy Hotel Booking | Find your perfect stay
+    </footer>
+
+    <script>
+        // Complete Hotel Database
+        const allHotels = [
+            { id: 1, name: "Grand Plaza Hotel", city: "Cairo", price: 120, rating: 4.8, wifi: true, pool: true, breakfast: true, img: "🏨", description: "Luxury hotel in the heart of downtown Cairo with stunning city views" },
+            { id: 2, name: "Seaside Resort", city: "Alexandria", price: 150, rating: 4.6, wifi: true, pool: true, breakfast: true, img: "🏖️", description: "Beautiful beachfront resort with private beach access" },
+            { id: 3, name: "Mountain View Lodge", city: "Sharm El Sheikh", price: 200, rating: 4.9, wifi: true, pool: true, breakfast: true, img: "⛰️", description: "Stunning mountain and sea views, perfect for diving" },
+            { id: 4, name: "City Center Hotel", city: "Giza", price: 90, rating: 4.2, wifi: true, pool: false, breakfast: true, img: "🏙️", description: "Located near the Pyramids, great value for money" },
+            { id: 5, name: "Luxury Palace", city: "Luxor", price: 180, rating: 4.7, wifi: true, pool: true, breakfast: true, img: "👑", description: "Royal experience with views of the Nile River" },
+            { id: 6, name: "Beach Bungalow", city: "Hurghada", price: 160, rating: 4.5, wifi: true, pool: true, breakfast: true, img: "🏖️", description: "Perfect for diving and water sports enthusiasts" },
+            { id: 7, name: "Budget Inn", city: "Cairo", price: 50, rating: 3.8, wifi: true, pool: false, breakfast: false, img: "🏨", description: "Clean and comfortable budget accommodation" },
+            { id: 8, name: "Sunset Hotel", city: "Alexandria", price: 110, rating: 4.3, wifi: true, pool: true, breakfast: true, img: "🌅", description: "Amazing sunset views over the Mediterranean" },
+            { id: 9, name: "Pyramids View Hotel", city: "Giza", price: 250, rating: 4.9, wifi: true, pool: true, breakfast: true, img: "🗿", description: "Direct view of the Great Pyramids" },
+            { id: 10, name: "Red Sea Resort", city: "Hurghada", price: 220, rating: 4.8, wifi: true, pool: true, breakfast: true, img: "🏖️", description: "Luxury resort with coral reef access" },
+            { id: 11, name: "Nile View Hotel", city: "Luxor", price: 140, rating: 4.4, wifi: true, pool: true, breakfast: true, img: "🌊", description: "Beautiful views of the River Nile" },
+            { id: 12, name: "Desert Rose", city: "Sharm El Sheikh", price: 170, rating: 4.6, wifi: true, pool: true, breakfast: true, img: "🌵", description: "Traditional architecture with modern amenities" }
+        ];
+
+        // Display User Info
+        function displayUserInfo() {
+            const loggedInUser = sessionStorage.getItem('loggedInUser');
+            const userBar = document.getElementById('userBar');
+            
+            if (loggedInUser) {
+                const user = JSON.parse(loggedInUser);
+                userBar.innerHTML = `
+                    <div class="user-info">
+                        <div>👋 Welcome, <strong>${user.name}</strong>! ✉️ ${user.email}</div>
+                        <button class="logout-btn" onclick="logout()">Logout</button>
+                    </div>
+                `;
+            } else {
+                userBar.innerHTML = `
+                    <div class="user-info">
+                        <div>🔐 <a href="login.html" style="color:#ff9800;">Log in</a> to book hotels and get exclusive deals!</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('loggedInUser');
+            displayUserInfo();
+            alert("You have been logged out successfully!");
+        }
+
+        // Display Hotels
+        function displayHotels(hotelsArray) {
+            const container = document.getElementById('allHotels');
+            const resultsCount = document.getElementById('resultsCount');
+            
+            resultsCount.innerHTML = `Found ${hotelsArray.length} hotel${hotelsArray.length !== 1 ? 's' : ''}`;
+            
+            if (hotelsArray.length === 0) {
+                container.innerHTML = '<div class="no-results">❌ No hotels found. Try changing your filters.</div>';
+                return;
+            }
+            
+            container.innerHTML = '';
+            hotelsArray.forEach(hotel => {
+                const amenities = [];
+                if (hotel.wifi) amenities.push('<span class="amenity">📶 Free WiFi</span>');
+                if (hotel.pool) amenities.push('<span class="amenity">🏊 Pool</span>');
+                if (hotel.breakfast) amenities.push('<span class="amenity">🍳 Breakfast</span>');
+                
+                container.innerHTML += `
+                    <div class="hotel-card">
+                        <div class="hotel-img">${hotel.img}</div>
+                        <div class="hotel-info">
+                            <h3>${hotel.name}</h3>
+                            <div class="hotel-location">📍 ${hotel.city}</div>
+                            <div class="rating">⭐ ${hotel.rating} / 5.0</div>
+                            <p style="margin: 10px 0; color:#666;">${hotel.description}</p>
+                            <div class="amenities">${amenities.join('')}</div>
+                        </div>
+                        <div class="price-section">
+                            <div><span class="price">$${hotel.price}</span> <span class="per-night">/ night</span></div>
+                            <button class="book-btn" onclick="bookHotel(${hotel.id})">Book Now</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Filter Hotels
+        function filterHotels() {
+            let filtered = [...allHotels];
+            
+            // Filter by city
+            const city = document.getElementById('filterCity').value.toLowerCase();
+            if (city) {
+                filtered = filtered.filter(h => h.city.toLowerCase().includes(city));
+            }
+            
+            // Filter by price
+            const priceRange = document.getElementById('filterPrice').value;
+            if (priceRange) {
+                if (priceRange === '0-50') filtered = filtered.filter(h => h.price < 50);
+                else if (priceRange === '50-100') filtered = filtered.filter(h => h.price >= 50 && h.price < 100);
+                else if (priceRange === '100-150') filtered = filtered.filter(h => h.price >= 100 && h.price < 150);
+                else if (priceRange === '150-200') filtered = filtered.filter(h => h.price >= 150 && h.price < 200);
+                else if (priceRange === '200+') filtered = filtered.filter(h => h.price >= 200);
+            }
+            
+            // Filter by rating
+            const rating = parseFloat(document.getElementById('filterRating').value);
+            if (rating > 0) {
+                filtered = filtered.filter(h => h.rating >= rating);
+            }
+            
+            // Filter by amenity
+            const amenity = document.getElementById('filterAmenity').value;
+            if (amenity === 'pool') filtered = filtered.filter(h => h.pool === true);
+            else if (amenity === 'wifi') filtered = filtered.filter(h => h.wifi === true);
+            else if (amenity === 'breakfast') filtered = filtered.filter(h => h.breakfast === true);
+            
+            displayHotels(filtered);
+        }
+
+        // Reset Filters
+        function resetFilter() {
+            document.getElementById('filterCity').value = '';
+            document.getElementById('filterPrice').value = '';
+            document.getElementById('filterRating').value = '0';
+            document.getElementById('filterAmenity').value = '';
+            displayHotels(allHotels);
+        }
+
+        // Book Hotel
+        function bookHotel(hotelId) {
+            const hotel = allHotels.find(h => h.id === hotelId);
+            
+            // Check if user is logged in
+            const loggedInUser = sessionStorage.getItem('loggedInUser');
+            if (!loggedInUser) {
+                if (confirm("Please log in to book a hotel. Go to login page?")) {
+                    window.location.href = 'login.html';
+                }
+                return;
+            }
+            
+            // Save selected hotel
+            localStorage.setItem('selectedHotel', JSON.stringify({
+                name: hotel.name,
+                city: hotel.city,
+                price: hotel.price,
+                rating: hotel.rating,
+                guests: 2,
+                checkin: new Date().toISOString().split('T')[0],
+                checkout: new Date(Date.now() + 2*24*60*60*1000).toISOString().split('T')[0],
+                nights: 2,
+                total: hotel.price * 2
+            }));
+            
+            window.location.href = 'booking.html';
+        }
+
+        // Show all hotels on load
+        window.onload = function() {
+            displayUserInfo();
+            displayHotels(allHotels);
+        };
+    </script>
+</body>
+</html>
