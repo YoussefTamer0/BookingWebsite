@@ -109,12 +109,23 @@
 </head>
 <body>
     <nav>
-        <a href="D:\2 study\universty\Second year\semester 4\web programming\project\html\Homepage.html">Home</a> |
-        <a href="D:\2 study\universty\Second year\semester 4\web programming\project\html\Hotels.html">All Hotels</a> |
-        <a href="About us.html">About Us</a> |
-        <a href="D:\2 study\universty\Second year\semester 4\web programming\project\html\Log in.html">Log In</a> |
-        <a href="D:\2 study\universty\Second year\semester 4\web programming\project\html\Sign up.html">Sign Up</a>
+    <a href="Homepage.html">Home</a> | 
+    <a href="Hotels.html">All Hotels</a> | 
+    <a href="About us.html">About Us</a> | 
+    <a href="Log in.html">Log In</a> | 
+    <a href="Sign up.html">Sign Up</a>
     </nav>
+    <script>
+    function bookHotel(hotelId) {
+        if (!loggedInUser) {
+            if (confirm("Please log in to book a hotel. Go to login page?")) {
+                window.location.href = 'Log in.html';
+            }
+            return;
+        }
+        window.location.href = 'Booking.html';
+    }
+    </script>
 
     <div class="container">
         <h2>Complete Your Booking</h2>
