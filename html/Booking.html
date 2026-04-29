@@ -115,6 +115,17 @@
         <a href="Log in.html">Log In</a> |
         <a href="Sign up.html">Sign Up</a>
     </nav>
+    <script>
+    function bookHotel(hotelId) {
+        if (!loggedInUser) {
+            if (confirm("Please log in to book a hotel. Go to login page?")) {
+                window.location.href = 'Log in.html';
+            }
+            return;
+        }
+        window.location.href = 'Booking.html';
+    }
+    </script>
 
     <div class="container">
         <h2>Complete Your Booking</h2>

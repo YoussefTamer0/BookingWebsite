@@ -169,12 +169,20 @@
 </head>
 <body>
     <nav>
-        <a href="D:\2 study\universty\Second year\semester 4\web programming\project\html\Homepage.html">Home</a> |
-        <a href="D:\2 study\universty\Second year\semester 4\web programming\project\html\Hotels.html">All Hotels</a> |
-        <a href="About us.html">About Us</a> |
-        <a href="D:\2 study\universty\Second year\semester 4\web programming\project\html\Log in.html">Log In</a> |
-        <a href="D:\2 study\universty\Second year\semester 4\web programming\project\html\Sign up.html">Sign Up</a>
-    </nav>
+    <a href="Homepage.html">Home</a> | 
+    <a href="Hotels.html">All Hotels</a> | 
+    <a href="About us.html">About Us</a> | 
+    <a href="Log in.html">Log In</a> | 
+    <a href="Sign up.html">Sign Up</a>
+</nav>
+
+<script>
+    function selectHotel(name, city, price, rating) {
+        localStorage.setItem('selectedHotel', JSON.stringify({ 
+            name, city, price, rating, guests, checkin, checkout, nights, total }));
+        window.location.href = 'Booking.html';
+    }
+</script>
 
     <div class="container">
         <h1>🏨 StayEasy</h1>
